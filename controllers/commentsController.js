@@ -17,10 +17,6 @@ exports.comments_create = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("comment_timestamp", "Invalid date")
-    .optional({ checkFalsy: true })
-    .isISO8601()
-    .toDate(),
   // Process request after validation and sanitization.
   (req, res, next) => {
     // Extract the validation errors from a request.
@@ -41,7 +37,6 @@ exports.comments_create = [
       post: req.body.post,
       author: req.body.author,
       content: req.body.comment_content,
-      timestamp: req.body.comment_timestamp,
     });
 
     comment.save((err) => {

@@ -63,10 +63,6 @@ exports.posts_create = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("post_timestamp", "Invalid date")
-    .optional({ checkFalsy: true })
-    .isISO8601()
-    .toDate(),
   body("is_published").escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -88,7 +84,6 @@ exports.posts_create = [
       author: req.body.author,
       title: req.body.post_title,
       content: req.body.post_content,
-      timestamp: req.body.post_timestamp,
       is_published: req.body.is_published,
     });
 
@@ -129,10 +124,6 @@ exports.posts_update = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("post_timestamp", "Invalid date")
-    .optional({ checkFalsy: true })
-    .isISO8601()
-    .toDate(),
   body("is_published").escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -154,7 +145,6 @@ exports.posts_update = [
       author: req.body.author,
       title: req.body.post_title,
       content: req.body.post_content,
-      timestamp: req.body.post_timestamp,
       is_published: req.body.is_published,
       _id: req.params.postid,
     });
