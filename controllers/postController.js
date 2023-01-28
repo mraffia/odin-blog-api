@@ -44,7 +44,12 @@ exports.post_update_post = (req, res, next) => {
   res.send("NOT IMPLEMENTED: Post update POST");
 };
 
-// Handle post toggle publish status on POST.
-exports.post_togglepublish_post = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post toggle publish status POST");
+// Handle post publish on POST.
+exports.post_publish_post = (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Post toggle publish POST");
+};
+
+// Handle post unpublish on POST.
+exports.post_unpublish_post = (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Post toggle unpublish POST");
 };
