@@ -106,7 +106,12 @@ exports.posts_create = [
 
 // Handle post delete
 exports.posts_delete = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post delete POST");
+  Post.findByIdAndRemove(req.params.postid, (err) => {
+    if (err) {
+      return next(err);
+    }
+    res.json(`Post deleted: ${req.params.postid}`);
+  });
 };
 
 // Handle post update
