@@ -2,7 +2,15 @@ const Post = require("../models/post");
 
 // Display list of all posts.
 exports.posts_list = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post list");
+  Post.find({})
+    .sort({ timestamp: -1 })
+    .populate("author")
+    .exec(function (err, list_books) {
+      if (err) {
+        return next(err);
+      }
+      res.json(list_books);
+    });
 };
 
 // Display detail page for a specific post.

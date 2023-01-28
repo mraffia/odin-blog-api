@@ -16,11 +16,11 @@ app.use(cors());
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.MONGODB_URI;
+const mongoDB = process.env.MONGODB_URI || "mongodb+srv://mraffia:poopski@cluster0.n6ofebb.mongodb.net/blog_api?retryWrites=true&w=majority";
 
 main().catch(err => console.log(err));
 async function main() {
-  await mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(mongoDB);
 }
 
 app.use(logger('dev'));
