@@ -12,7 +12,7 @@ const CommentSchema = new Schema({
 // Virtual for comment's URL
 CommentSchema.virtual("url").get(function () {
   // We don't use an arrow function as we'll need the this object
-  return `/comment/${this._id}`;
+  return `/comments/${this._id}`;
 });
 
 // Export model
