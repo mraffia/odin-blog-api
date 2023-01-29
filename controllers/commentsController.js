@@ -1,6 +1,6 @@
-const Comment = require("../models/comment");
-
 const { body, validationResult } = require("express-validator");
+
+const Comment = require("../models/comment");
 
 // Handle Comment create
 exports.comments_create = [
@@ -25,8 +25,9 @@ exports.comments_create = [
     if (!errors.isEmpty()) {
       // There are errors. Return data with sanitized values/errors messages.
       res.json({
+        message: "Invalid form data",
         comment: req.body,
-        errors: errors.array(),
+        errors: errors.array()
       });
       return;
     }
@@ -36,7 +37,7 @@ exports.comments_create = [
     const comment = new Comment({
       post: req.body.post,
       author: req.body.comment_author,
-      content: req.body.comment_content,
+      content: req.body.comment_content
     });
 
     comment.save((err) => {
@@ -44,7 +45,8 @@ exports.comments_create = [
         return next(err);
       }
       res.json({
-        comment: comment,
+        message: "Create a comment successful",
+        comment,
         comment_url: comment.url
       });
     });

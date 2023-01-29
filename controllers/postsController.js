@@ -1,19 +1,22 @@
-const Post = require("../models/post");
-const Comment = require("../models/comment");
-
 const async = require('async');
 const { body, validationResult } = require("express-validator");
+
+const Post = require("../models/post");
+const Comment = require("../models/comment");
 
 // Display list of all posts.
 exports.posts_list = (req, res, next) => {
   Post.find({})
     .sort({ timestamp: -1 })
     .populate("author")
-    .exec(function (err, list_books) {
+    .exec(function (err, posts) {
       if (err) {
         return next(err);
       }
-      res.json(list_books);
+      res.json({
+        message: "Get all posts successful",
+        posts
+      });
     });
 };
 
@@ -41,6 +44,7 @@ exports.posts_detail = (req, res, next) => {
         return next(err);
       }
       res.json({
+        message: "Get a post successful",
         post: results.post,
         comments: results.comments
       });
@@ -72,8 +76,9 @@ exports.posts_create = [
     if (!errors.isEmpty()) {
       // There are errors. Return data with sanitized values/errors messages.
       res.json({
+        message: "Invalid form data",
         post: req.body,
-        errors: errors.array(),
+        errors: errors.array()
       });
       return;
     }
@@ -84,7 +89,7 @@ exports.posts_create = [
       author: req.body.post_author,
       title: req.body.post_title,
       content: req.body.post_content,
-      is_published: req.body.is_published,
+      is_published: req.body.is_published
     });
 
     post.save((err) => {
@@ -92,6 +97,7 @@ exports.posts_create = [
         return next(err);
       }
       res.json({
+        message: "Create a post successful",
         post: post,
         post_url: post.url
       });
@@ -105,7 +111,10 @@ exports.posts_delete = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.json(`Post deleted: ${req.body.postid}`);
+    res.json({ 
+      message: "Delete a post successful",
+      postid: req.body.postid 
+    });
   });
 };
 
@@ -133,8 +142,9 @@ exports.posts_update = [
     if (!errors.isEmpty()) {
       // There are errors. Return data with sanitized values/errors messages.
       res.json({
+        message: "Invalid form data",
         post: req.body,
-        errors: errors.array(),
+        errors: errors.array()
       });
       return;
     }
@@ -146,7 +156,7 @@ exports.posts_update = [
       title: req.body.post_title,
       content: req.body.post_content,
       is_published: req.body.is_published,
-      _id: req.params.postid,
+      _id: req.params.postid
     });
 
     Post.findByIdAndUpdate(req.params.postid, post, {}, (err, thepost) => {
@@ -154,6 +164,7 @@ exports.posts_update = [
         return next(err);
       }
       res.json({
+        message: "Update a post successful",
         post: thepost,
         post_url: thepost.url
       });

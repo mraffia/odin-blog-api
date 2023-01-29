@@ -3,6 +3,7 @@ const passport = require("passport");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+
 const User = require("../models/user");
 
 exports.auth_signup = [
@@ -33,8 +34,9 @@ exports.auth_signup = [
     if (!errors.isEmpty()) {
       // There are errors. Return data with sanitized values/errors messages.
       res.json({
+        message: "Invalid form data",
         user: req.body,
-        errors: errors.array(),
+        errors: errors.array()
       });
       return;
     } else {
@@ -46,9 +48,9 @@ exports.auth_signup = [
         }
         if (found_user) {
           res.json({
-            notice: "Can't use that username, it already exist!",
+            message: "Username already exist",
             user: req.body,
-            errors: errors.array(),
+            errors: errors.array()
           });
           return;
         } else {
@@ -59,7 +61,7 @@ exports.auth_signup = [
               const user = new User({
                 name: req.body.name,
                 username: req.body.username,
-                password: hashedPassword,
+                password: hashedPassword
               });
               
               user.save(err => {
