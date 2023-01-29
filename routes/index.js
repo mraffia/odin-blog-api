@@ -1,9 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.json("Hello World");
-});
+const auth_controller = require("../controllers/authController");
+
+router.post("/signup", auth_controller.auth_signup);
+
+router.post('/login', auth_controller.auth_login);
+
+router.get("/logout", auth_controller.auth_logout);
 
 module.exports = router;
+
