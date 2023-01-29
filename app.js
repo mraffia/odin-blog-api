@@ -3,6 +3,8 @@ const cors = require('cors')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const compression = require("compression");
+const helmet = require("helmet");
 
 require('dotenv').config();
 require('./passport');
@@ -14,6 +16,8 @@ const commentsRouter = require('./routes/comments');
 
 const app = express();
 
+app.use(compression());
+app.use(helmet());
 app.use(cors());
 
 // Set up mongoose connection
