@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const passport = require("passport");
 
 const posts_controller = require("../controllers/postsController");
 
@@ -10,12 +11,12 @@ router.get("/", posts_controller.posts_list);
 router.get("/:postid", posts_controller.posts_detail);
 
 // POST request for creating Post.
-router.post("/", posts_controller.posts_create);
+router.post("/", passport.authenticate('jwt', { session: false }), posts_controller.posts_create);
 
 // DELETE request to delete Post.
-router.delete("/:postid", posts_controller.posts_delete);
+router.delete("/:postid", passport.authenticate('jwt', { session: false }), posts_controller.posts_delete);
 
 // PUT request to update Post.
-router.put("/:postid", posts_controller.posts_update);
+router.put("/:postid", passport.authenticate('jwt', { session: false }), posts_controller.posts_update);
 
 module.exports = router;
