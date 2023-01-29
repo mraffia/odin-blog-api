@@ -19,7 +19,7 @@ passport.use(
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           // passwords match! log user in
-          return done(null, user, { message: 'Log in successful' })
+          return done(null, user)
         } else {
           // passwords do not match!
           return done(null, false, { message: "Incorrect password" })
@@ -32,7 +32,7 @@ passport.use(
 passport.use(
   new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'jwt_secret'
+    secretOrKey: process.env.JWT_SECRET
   }, (jwtPayload, done) => {
     //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
     return User.findById(jwtPayload.id)
