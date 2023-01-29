@@ -9,7 +9,7 @@ exports.comments_create = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("author", "Author must not be empty.")
+  body("comment_author", "Author must not be empty.")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -35,7 +35,7 @@ exports.comments_create = [
     // Create a Comment object with escaped and trimmed data.
     const comment = new Comment({
       post: req.body.post,
-      author: req.body.author,
+      author: req.body.comment_author,
       content: req.body.comment_content,
     });
 

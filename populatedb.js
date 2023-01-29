@@ -24,12 +24,11 @@ const users = []
 const posts = []
 const comments = []
 
-function userCreate(name, username, password, is_admin, cb) {
+function userCreate(name, username, password, cb) {
   const user = new User({
     name: name,
     username: username,
     password: password,
-    is_admin: is_admin
   });
        
   user.save(function (err) {
@@ -92,13 +91,13 @@ function commentCreate(post, author, content, timestamp, cb) {
 function createUsers(cb) {
     async.series([
         function(callback) {
-          userCreate('Sigma', 'sigma', "males", true, callback);
+          userCreate('Sigma', 'sigma', "males", callback);
         },
         function(callback) {
-          userCreate('Alpha', 'alpha', "males", true, callback);
+          userCreate('Alpha', 'alpha', "males", callback);
         },
         function(callback) {
-          userCreate('Beta', 'beta', "males", false, callback);
+          userCreate('Beta', 'beta', "males", callback);
         },
         ],
         // optional callback
@@ -126,13 +125,13 @@ function createPosts(cb) {
 function createComments(cb) {
     async.parallel([
         function(callback) {
-          commentCreate(posts[0], users[0], 'First comment content', Date.now(), callback)
+          commentCreate(posts[0], "Brudda", 'First comment content', Date.now(), callback)
         },
         function(callback) {
-          commentCreate(posts[0], posts[1], 'Second comment content', Date.now(), callback)
+          commentCreate(posts[0], "Ossas", 'Second comment content', Date.now(), callback)
         },
         function(callback) {
-          commentCreate(posts[2], posts[2], 'Third comment content', Date.now(), callback)
+          commentCreate(posts[2], "Amogus", 'Third comment content', Date.now(), callback)
         },
         ],
         // Optional callback

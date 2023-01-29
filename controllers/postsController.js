@@ -51,7 +51,7 @@ exports.posts_detail = (req, res, next) => {
 // Handle post create
 exports.posts_create = [
   // Validate and sanitize fields.
-  body("author", "Author must not be empty.")
+  body("post_author", "Author must not be empty.")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -81,7 +81,7 @@ exports.posts_create = [
     // Data from form is valid.
     // Create a Post object with escaped and trimmed data.
     const post = new Post({
-      author: req.body.author,
+      author: req.body.post_author,
       title: req.body.post_title,
       content: req.body.post_content,
       is_published: req.body.is_published,
@@ -112,7 +112,7 @@ exports.posts_delete = (req, res, next) => {
 // Handle post update
 exports.posts_update = [
   // Validate and sanitize fields.
-  body("author", "Author must not be empty.")
+  body("post_author", "Author must not be empty.")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -142,7 +142,7 @@ exports.posts_update = [
     // Data from form is valid.
     // Create a Post object with escaped and trimmed data and old id.
     const post = new Post({
-      author: req.body.author,
+      author: req.body.post_author,
       title: req.body.post_title,
       content: req.body.post_content,
       is_published: req.body.is_published,
