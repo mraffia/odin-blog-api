@@ -9,6 +9,9 @@ const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 
+require('./passport');
+require('dotenv').config();
+
 const app = express();
 
 app.use(cors());
@@ -16,7 +19,7 @@ app.use(cors());
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.MONGODB_URI || "mongodb+srv://mraffia:poopski@cluster0.n6ofebb.mongodb.net/blog_api?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_URI;
 
 main().catch(err => console.log(err));
 async function main() {
@@ -33,5 +36,21 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 module.exports = app;
