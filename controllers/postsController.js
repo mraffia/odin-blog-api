@@ -30,7 +30,9 @@ exports.posts_detail = (req, res, next) => {
           .exec(callback);
       },
       comments(callback) {
-        Comment.find({ post: req.params.postid }).exec(callback);
+        Comment.find({ post: req.params.postid })
+          .sort({ timestamp: -1 })
+          .exec(callback);
       },
     },
     (err, results) => {
