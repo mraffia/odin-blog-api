@@ -16,5 +16,9 @@ PostSchema.virtual("url").get(function () {
   return `/posts/${this._id}`;
 });
 
+PostSchema.virtual("timestamp_formatted").get(function () {
+  return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATE_MED);
+});
+
 // Export model
 module.exports = mongoose.model("Post", PostSchema);
