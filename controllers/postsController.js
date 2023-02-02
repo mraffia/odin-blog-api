@@ -109,7 +109,7 @@ exports.posts_create = [
 
 // Handle post delete
 exports.posts_delete = (req, res, next) => {
-  Post.findByIdAndRemove(req.body.postid, (err, thepost) => {
+  Post.findByIdAndRemove(req.params.postid, (err, thepost) => {
     if (err) {
       return next(err);
     }
