@@ -100,12 +100,3 @@ exports.auth_login = (req, res, next) => {
     });
   })(req, res);
 }
-
-exports.auth_logout = (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.json({ message: "Log out successful" });
-  });
-}
