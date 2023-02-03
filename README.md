@@ -4,9 +4,12 @@ Blog API project from NodeJS section of the Full Stack Javascript Course on The 
 
 ## Project Website
 - [Blog client live demo](https://mraffia.github.io/odin-blog)
-- [CMS live demo](https://mraffia.github.io/odin-blog-cms)
+- [Blog CMS live demo](https://mraffia.github.io/odin-blog-cms)
 - [Blog client repo](https://github.com/mraffia/odin-blog)
-- [CMS repo](https://github.com/mraffia/odin-blog-cms)
+- [Blog CMS repo](https://github.com/mraffia/odin-blog-cms)
+
+### Blog CMS Preview
+![Blog CMS Preview](https://media.giphy.com/media/DjsilnWDU5KHG3hR4M/giphy.gif)
 
 ## Project Description
 A blog built with an API only backend and two different front-ends for accessing and editing blog posts. One of the front-end sites will be for people that want to read and comment on posts while the other one will be just for the admin user to write, edit, and publish posts.
@@ -19,8 +22,9 @@ A blog built with an API only backend and two different front-ends for accessing
 
 ## Tools
 - Node.js/Express - API Backend
-- Passport JS for local & JWT authentication
+- Passport.js for local & JWT authentication
 - MongoDB
 - React.js
 - API deployed using Railway
-- Client deployed using Github Pages
+- Client and CMS deployed using Github Pages
+
