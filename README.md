@@ -21,6 +21,8 @@ A blog built with an API only backend and two different front-ends for accessing
 - Comment on blog posts
 
 ## Tools
+- HTML
+- CSS
 - Node.js/Express - API Backend
 - Passport.js for local & JWT authentication
 - MongoDB
